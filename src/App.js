@@ -9,6 +9,8 @@ function App() {
       <h1> Hi I am react app</h1>
       <h1> This is really working </h1>
       <Person/>
+      <Person/>
+      <Person/>
     </div>
   );
 }
