@@ -9,7 +9,7 @@ function App() {
       <h1> Hi I am react app</h1>
       <h1> This is really working </h1>
       <Person name="Rimon" age="26"/>
-      <Person name="Miti" age="18"/>
+      <Person name="Miti" age="18">She is so HOT</Person>
       <Person name="Babu" age="1"/>
     </div>
   );
