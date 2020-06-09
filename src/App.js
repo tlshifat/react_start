@@ -11,11 +11,16 @@ function App() {
       {name:"Baby",age:2}
     ]
   };
+
+  let switchName = ()=>{
+    console.log('Was clicked ');
+
+  }
   return (
     <div className="App">
       <h1> Hi I am react app</h1>
       <h1> This is really working </h1>
-      <button> Switch name </button>
+      <button onClick={switchName}> Switch name </button>
       <Person name={state.persons[0].name} age={state.persons[0].age}/>
       <Person name="Miti" age="18">She is so HOT</Person>
       <Person name="Babu" age="1"/>
