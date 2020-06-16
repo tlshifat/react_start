@@ -1,19 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
+import React,{useState} from 'react';
 import './App.css';
 import Person from './Person/Person';
 
-function App() {
-  const state = {
+const App=()=> {
+  const [state,setState] = useState({
     persons:[
       {name:"Rimon",age:26},
       {name:"Shifat",age:21},
       {name:"Baby",age:2}
     ]
-  };
+  });
 
   let switchName = ()=>{
-    console.log('Was clicked ');
+    setState(
+      {
+        persons:[
+          {name:"Shifatul Islam Rimon",age:26},
+          {name:"Shifat",age:21},
+          {name:"Baby",age:2}
+        ]
+      }
+    );
 
   }
   return (
