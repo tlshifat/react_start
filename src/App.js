@@ -3,6 +3,7 @@ import './App.css';
 import Person from './Person/Person';
 import Validation from './Validation/Validation';
 import Char from './Char/Char';
+import  './Char/Char.css';
 
 
 class App extends Component {
@@ -72,8 +73,12 @@ class App extends Component {
 
 
   }
+  
   render(){
-
+    const style={
+      backgroundColor:'green',
+      color:'white'
+    };
     let persons = null;
     let charsComponents = null;
     if(this.state.show){     
@@ -83,11 +88,12 @@ class App extends Component {
                  return  <Person change={(event)=>this.nameChangedHandler(event,person.id)}  key={person.id} name={person.name} age={person.age} click={()=>this.deletePerson(index)}/>
             })}
       </div> ); 
+      style.backgroundColor='red';
     }
     console.log(this.state.chars.length);
     if(this.state.chars.length > 0){
       charsComponents =  (
-        <div>
+        <div className="Char">
             {
               this.state.chars.map(
                 (char,index)=>{
@@ -107,7 +113,7 @@ class App extends Component {
       < Validation len={this.state.length}/>
       <Char char="A"/>
 
-        <button onClick={this.togglePerson}> Switch name </button>
+        <button style={style} onClick={this.togglePerson}> Switch name </button>
         
         {persons}
         {charsComponents}
