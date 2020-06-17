@@ -1,6 +1,9 @@
 import React,{useState, Component} from 'react';
 import './App.css';
 import Person from './Person/Person';
+import UserInput from './UserInput/UserInput';
+import UserOutput from './UserOutput/UserOutput';
+
 
 class App extends Component {
   state = {
@@ -8,7 +11,8 @@ class App extends Component {
       {name:"Rimon",age:26},
       {name:"Shifat",age:21},
       {name:"Baby",age:2}
-    ]
+    ],
+    name:"xx"
   };
 
    switchName = (newName)=>{
@@ -24,10 +28,24 @@ class App extends Component {
     );
 
   }
+
+  newstate={
+    name:"OKK"
+  };
+
+  nameChangedHandler = (event)=>{
+     this.setState({
+        name:event.target.value
+     })
+  }
+
   render(){
     return (
       <div className="App">
-        <h1> Hi I am react app</h1>
+       
+         <UserInput change={this.nameChangedHandler} userName={this.state.name}/> 
+         <UserOutput userName={this.state.name}/> 
+         <UserOutput userName="Min"/> 
         <h1> This is really working </h1>
         <button onClick={this.switchName}> Switch name </button>
         <Person  changed={this.switchName} name={this.state.persons[0].name} age={this.state.persons[0].age}/>
