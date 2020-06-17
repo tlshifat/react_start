@@ -1,7 +1,8 @@
 import React,{ Component} from 'react';
 import './App.css';
 import Person from './Person/Person';
-
+import Validation from './Validation/Validation';
+import Char from './Char/Char';
 
 
 class App extends Component {
@@ -13,7 +14,9 @@ class App extends Component {
     ],
     name:"xx",
     show: false,
-    length: 0
+    length: 0,
+    chars:[]
+
   };
 
 
@@ -47,18 +50,32 @@ class App extends Component {
     this.setState({persons:persons});
   }
   
-
+  charsComponent=null;
   getLength=(event)=>{
+      const chars=event.target.value.split('');
       this.setState({
-        length:event.target.value.length
+        length:event.target.value.length,
+        chars:chars
+        
       });
   }
 
   
+  deleteChar=(event,index)=>{
+    const charsArray = this.state.chars.slice();
+   
+    charsArray.splice(index,1);
+    this.setState({
+      chars:charsArray
+      
+    });
 
+
+  }
   render(){
 
     let persons = null;
+    let charsComponents = null;
     if(this.state.show){     
       persons=(
         <div className="personBlock">
@@ -67,16 +84,33 @@ class App extends Component {
             })}
       </div> ); 
     }
+    console.log(this.state.chars.length);
+    if(this.state.chars.length > 0){
+      charsComponents =  (
+        <div>
+            {
+              this.state.chars.map(
+                (char,index)=>{
+                  return <Char click={(event)=>this.deleteChar(event,index)} char={char} key={index+''+char}/>
+                }
+              )
+            }
+         </div> 
+      );
+    }
 
     return (
       <div className="App">
        <h1> This is really working </h1>
        <input type="text" onChange={this.getLength}/>
-    <p>Length is : {this.state.length}</p>
+        <p>Length is : {this.state.length}</p>
+      < Validation len={this.state.length}/>
+      <Char char="A"/>
 
         <button onClick={this.togglePerson}> Switch name </button>
         
         {persons}
+        {charsComponents}
         
       </div>
     )
