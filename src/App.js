@@ -12,7 +12,8 @@ class App extends Component {
       {name:"Baby",age:2,id:2}
     ],
     name:"xx",
-    show: false
+    show: false,
+    length: 0
   };
 
 
@@ -45,6 +46,13 @@ class App extends Component {
     persons.splice(index,1);
     this.setState({persons:persons});
   }
+  
+
+  getLength=(event)=>{
+      this.setState({
+        length:event.target.value.length
+      });
+  }
 
   
 
@@ -63,6 +71,9 @@ class App extends Component {
     return (
       <div className="App">
        <h1> This is really working </h1>
+       <input type="text" onChange={this.getLength}/>
+    <p>Length is : {this.state.length}</p>
+
         <button onClick={this.togglePerson}> Switch name </button>
         
         {persons}
