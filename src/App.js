@@ -8,9 +8,9 @@ import UserOutput from './UserOutput/UserOutput';
 class App extends Component {
   state = {
     persons:[
-      {name:"Rimon",age:26},
-      {name:"Shifat",age:21},
-      {name:"Baby",age:2}
+      {name:"Rimon",age:26,id:1},
+      {name:"Shifat",age:21,id:3},
+      {name:"Baby",age:2,id:2}
     ],
     name:"xx",
     show: false
@@ -47,15 +47,22 @@ class App extends Component {
     });
   }
 
+  deletePerson =(index)=>{
+    console.log(index);
+    const persons = this.state.persons.slice(); //copy a new array , as array is referenced type 
+    persons.splice(index,1);
+    this.setState({persons:persons});
+  }
+
   render(){
 
     let persons = null;
-    if(this.state.show){
+    if(this.state.show){     
       persons=(
         <div className="personBlock">
-          <Person  changed={this.switchName} name={this.state.persons[0].name} age={this.state.persons[0].age}/>
-          <Person click={this.switchName.bind(this,"SEXYYY")} name="Miti" age="18">She is so HOT</Person>
-          <Person name="Babu" age="1"/>
+           {this.state.persons.map((person,index)=>{
+                 return  <Person key={person.id} name={person.name} age={person.age} click={()=>this.deletePerson(index)}/>
+            })}
       </div> ); 
     }
 
