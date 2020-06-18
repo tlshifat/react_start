@@ -4,6 +4,7 @@ import Person from './Person/Person';
 import Validation from './Validation/Validation';
 import Char from './Char/Char';
 import  './Char/Char.css';
+import Radium,{StyleRoot} from 'radium';
 
 
 class App extends Component {
@@ -77,7 +78,11 @@ class App extends Component {
   render(){
     const style={
       backgroundColor:'green',
-      color:'white'
+      color:'white',
+      ':hover':{
+        backgroundColor:'lightgreen',
+        color:'yellow'
+      }
     };
     let persons = null;
     let charsComponents = null;
@@ -90,12 +95,17 @@ class App extends Component {
     }
     if(this.state.show){     
       persons=(
+        <StyleRoot>
         <div className="personBlock">
            {this.state.persons.map((person,index)=>{
                  return  <Person change={(event)=>this.nameChangedHandler(event,person.id)}  key={person.id} name={person.name} age={person.age} click={()=>this.deletePerson(index)}/>
             })}
-      </div> ); 
+      </div> 
+      </StyleRoot>); 
       style.backgroundColor='red';
+      style[':hover']={
+        backgroundColor:'yellow'
+      };
     }
     console.log(this.state.chars.length);
     if(this.state.chars.length > 0){
@@ -132,4 +142,4 @@ class App extends Component {
   
 }
 
-export default App;
+export default Radium(App);
