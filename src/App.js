@@ -81,6 +81,13 @@ class App extends Component {
     };
     let persons = null;
     let charsComponents = null;
+    let classes =[];
+    
+    if(this.state.persons.length < 2){
+      classes.push('red');
+    } else {
+      classes.push('bold');
+    }
     if(this.state.show){     
       persons=(
         <div className="personBlock">
@@ -105,9 +112,10 @@ class App extends Component {
       );
     }
 
+
     return (
       <div className="App">
-       <h1> This is really working </h1>
+       <h1 className={classes.join(' ')}> This is really working </h1>
        <input type="text" onChange={this.getLength}/>
         <p>Length is : {this.state.length}</p>
       < Validation len={this.state.length}/>
