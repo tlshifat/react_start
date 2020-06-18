@@ -3,6 +3,9 @@ import './App.css';
 import Person from './Person/Person';
 import Validation from './Validation/Validation';
 import Char from './Char/Char';
+import  './Char/Char.css';
+// import Radium,{StyleRoot} from 'radium';
+import styled from 'styled-components';
 
 
 class App extends Component {
@@ -72,22 +75,51 @@ class App extends Component {
 
 
   }
+  
   render(){
-
+    const StyledDiv = styled.div`
+      backgroundColor:green,
+      color:white,
+      &:hover:{
+        backgroundColor:lightgreen,
+        color:yellow
+      }
+    `;
+    const style={
+      backgroundColor:'green',
+      color:'white',
+      ':hover':{
+        backgroundColor:'lightgreen',
+        color:'yellow'
+      }
+    };
     let persons = null;
     let charsComponents = null;
+    let classes =[];
+    
+    if(this.state.persons.length < 2){
+      classes.push('red');
+    } else {
+      classes.push('bold');
+    }
     if(this.state.show){     
       persons=(
+        
         <div className="personBlock">
            {this.state.persons.map((person,index)=>{
                  return  <Person change={(event)=>this.nameChangedHandler(event,person.id)}  key={person.id} name={person.name} age={person.age} click={()=>this.deletePerson(index)}/>
             })}
-      </div> ); 
+      </div> 
+      ); 
+      style.backgroundColor='red';
+      style[':hover']={
+        backgroundColor:'yellow'
+      };
     }
     console.log(this.state.chars.length);
     if(this.state.chars.length > 0){
       charsComponents =  (
-        <div>
+        <div className="Char">
             {
               this.state.chars.map(
                 (char,index)=>{
@@ -99,20 +131,22 @@ class App extends Component {
       );
     }
 
+
     return (
-      <div className="App">
-       <h1> This is really working </h1>
+      // <div className="App">
+      <StyledDiv>
+       <h1 className={classes.join(' ')}> This is really working </h1>
        <input type="text" onChange={this.getLength}/>
         <p>Length is : {this.state.length}</p>
       < Validation len={this.state.length}/>
       <Char char="A"/>
 
-        <button onClick={this.togglePerson}> Switch name </button>
+        <button style={style} onClick={this.togglePerson}> Switch name </button>
         
         {persons}
         {charsComponents}
-        
-      </div>
+        </StyledDiv>  
+      
     )
   };
   
