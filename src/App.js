@@ -4,7 +4,8 @@ import Person from './Person/Person';
 import Validation from './Validation/Validation';
 import Char from './Char/Char';
 import  './Char/Char.css';
-import Radium,{StyleRoot} from 'radium';
+// import Radium,{StyleRoot} from 'radium';
+import styled from 'styled-components';
 
 
 class App extends Component {
@@ -76,6 +77,14 @@ class App extends Component {
   }
   
   render(){
+    const StyledDiv = styled.div`
+      backgroundColor:green,
+      color:white,
+      &:hover:{
+        backgroundColor:lightgreen,
+        color:yellow
+      }
+    `;
     const style={
       backgroundColor:'green',
       color:'white',
@@ -95,13 +104,13 @@ class App extends Component {
     }
     if(this.state.show){     
       persons=(
-        <StyleRoot>
+        
         <div className="personBlock">
            {this.state.persons.map((person,index)=>{
                  return  <Person change={(event)=>this.nameChangedHandler(event,person.id)}  key={person.id} name={person.name} age={person.age} click={()=>this.deletePerson(index)}/>
             })}
       </div> 
-      </StyleRoot>); 
+      ); 
       style.backgroundColor='red';
       style[':hover']={
         backgroundColor:'yellow'
@@ -124,7 +133,8 @@ class App extends Component {
 
 
     return (
-      <div className="App">
+      // <div className="App">
+      <StyledDiv>
        <h1 className={classes.join(' ')}> This is really working </h1>
        <input type="text" onChange={this.getLength}/>
         <p>Length is : {this.state.length}</p>
@@ -135,11 +145,11 @@ class App extends Component {
         
         {persons}
         {charsComponents}
-        
-      </div>
+        </StyledDiv>  
+      
     )
   };
   
 }
 
-export default Radium(App);
+export default App;
