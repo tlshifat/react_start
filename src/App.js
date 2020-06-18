@@ -85,6 +85,12 @@ class App extends Component {
         color:yellow
       }
     `;
+
+    const StyleButton = styled.button`
+      background-color:${props=>props.alt?'red':'green'};     
+    `;
+
+
     const style={
       backgroundColor:'green',
       color:'white',
@@ -141,7 +147,7 @@ class App extends Component {
       < Validation len={this.state.length}/>
       <Char char="A"/>
 
-        <button style={style} onClick={this.togglePerson}> Switch name </button>
+        <StyleButton  alt={this.state.show} onClick={this.togglePerson}> Switch name </StyleButton>
         
         {persons}
         {charsComponents}
